@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:developer';
+import 'dart:isolate';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -82,7 +83,6 @@ class YoutubePlayer extends StatefulWidget {
 
 class _YoutubePlayerState extends State<YoutubePlayer> {
   late final YoutubePlayerController _controller;
-
   @override
   void initState() {
     super.initState();

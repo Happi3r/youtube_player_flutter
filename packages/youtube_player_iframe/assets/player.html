@@ -27,12 +27,22 @@
         width: 100% !important;
         height: 100% !important;
       }
+
+      #hide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 99;
+      }
     </style>
     <title>Youtube Player</title>
   </head>
 
   <body>
     <div class="embed-container">
+      <div id="hide"></div>
       <div id="player"></div>
     </div>
 
@@ -48,7 +58,19 @@
       function onYouTubeIframeAPIReady() {
         player = new YT.Player("player", {
           host: host,
-          playerVars: <<playerVars>>,
+          playerVars: {
+            'modestbranding': 1,
+            'autoplay': 1,
+            'controls': 0,
+            'showinfo': 0,
+            'rel': 0,
+            'loop': 0,
+            'fs': 0,
+            'color': 'white',
+            'cc_load_policy': 0,
+            'iv_load_policy': 3,
+            'disablekb': 1
+          },
           events: {
             onReady: function (event) {
               handleFullScreenForMobilePlatform();

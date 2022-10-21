@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:meta/meta.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:youtube_player_iframe/src/iframe_api/src/functions/video_information.dart';
@@ -35,7 +36,7 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
     double? startSeconds,
     double? endSeconds,
   }) {
-    final controller = YoutubePlayerController(params: params);
+    final controller = YoutubePlayerController();
 
     return controller
       ..onInit = () {
@@ -233,7 +234,6 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
 
     await controller.loadHtmlString(
       playerHtml
-          .replaceFirst('<<playerVars>>', params.toJson())
           .replaceFirst('<<platform>>', platform)
           .replaceFirst('<<host>>', params.origin ?? 'https://www.youtube.com'),
       baseUrl: baseUrl,
@@ -301,6 +301,10 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
       playbackQuality: playbackQuality ?? value.playbackQuality,
       error: error ?? value.error,
       metaData: metaData ?? value.metaData,
+    );
+
+    FlutterForegroundTask.updateService(
+      playing: playerState == PlayerState.playing,
     );
 
     _valueController.add(updatedValue);

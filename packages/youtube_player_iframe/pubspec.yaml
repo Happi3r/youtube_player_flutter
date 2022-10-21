@@ -15,6 +15,11 @@ dependencies:
   webview_flutter: ^3.0.4
   url_launcher: ^6.1.5
   youtube_player_iframe_web: ^1.0.4
+  flutter_foreground_task:
+    git:
+      url: https://github.com/Happi3r/flutter_foreground_task
+      ref: master
+    # path: Z:/Projects/flutter/flutter_foreground_task
 
 dev_dependencies:
   flutter_test:
