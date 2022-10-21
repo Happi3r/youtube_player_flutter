@@ -515,7 +515,9 @@ class YoutubePlayerController implements YoutubePlayerIFrameAPI {
   Future<double> get currentTime async {
     final time = await _runWithResult('getCurrentTime');
 
-    return double.tryParse(time) ?? 0;
+    final result = double.tryParse(time) ?? 0;
+    FlutterForegroundTask.updateService(position: result);
+    return result;
   }
 
   @override
